@@ -11,35 +11,35 @@ Node::Node() : m_left (nullptr ), m_right (nullptr ) {
 }
 
 Node::Node(const int &value) : m_left (nullptr ), m_right (nullptr ) {
-        setValue(value);
+    setValue(value);
 }
 
 Node::Node(const int &value, Node *left , Node *right ) {
-        setValue(value);
-        setLeft (left );
-        setRight (right );
+    setValue(value);
+    setLeft (left );
+    setRight (right );
 }
 
 int Node::value() const {
-        return m_value;
+    return m_value;
 }
 
 void Node::setValue (const int &value) {
-        m_value = value;
+    m_value = value;
 }
 
 void Node::setLeft (Node *node) {
-        m_left  = node;
+    m_left  = node;
 }
 
 void Node::setRight (Node *node) {
-        m_right  = node;
+    m_right  = node;
 }
 
 Node *Node::left () const {
-        return m_left ;
+    return m_left ;
 }
 
 Node *Node::right () const {
-        return m_right ;
+    return m_right ;
 }

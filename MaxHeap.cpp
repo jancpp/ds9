@@ -20,30 +20,30 @@ MaxHeap::MaxHeap() {
 
 void MaxHeap::buildheap() {
     
-    // Read data from a file into array
-    std::ifstream inputFile;
-    int number = -1;
-    m_size = 0;
-    inputFile.open("data.txt");
-    if (!inputFile) {
-        inputFile.close();
-        std::cout << "Error reading the input file.\n";
-    } else {
-        std::cout << "Data.txt elements:";
-        while(inputFile >> number) {
-            std::cout << " " << number;
-            m_array[m_size] = number;
-            m_size++;
-        }
-        inputFile.close();
-        std::cout << "\n";
-        for (int i=m_size-1; 0<=i; i--) {
-            if (!isLeaf(i)) {
-                heapify(i);
-                levelorder();
-            }
-        }
-    }
+//    // Read data from a file into array
+//    std::ifstream inputFile;
+//    int number = -1;
+//    m_size = 0;
+//    inputFile.open("data.txt");
+//    if (!inputFile) {
+//        inputFile.close();
+//        std::cout << "Error reading the input file.\n";
+//    } else {
+//        std::cout << "Data.txt elements:";
+//        while(inputFile >> number) {
+//            std::cout << " " << number;
+//            m_array[m_size] = number;
+//            m_size++;
+//        }
+//        inputFile.close();
+//        std::cout << "\n";
+//        for (int i=m_size-1; 0<=i; i--) {
+//            if (!isLeaf(i)) {
+//                heapify(i);
+//                levelorder();
+//            }
+//        }
+//    }
 }
 
 void MaxHeap::heapify(int index) {

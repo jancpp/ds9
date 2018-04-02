@@ -1,5 +1,12 @@
 Jan Polzer
-Lab6 – Summary
+Lab09 – Summary
+
+1-	Organization of experimental profiling.
+2-	Input data generating using random number generator.
+3-	CPU time recording in C++.
+4-	Data recording and analysis.
+5-	Performance comparison, observations and summary.
+6-	Conclusion.
 
 During experimental profiling on open hash table with chaining, closed hast table with quadratic probing, and closed hash table with double hashing, I tested performance of the hash tables. I measured time in milliseconds.
 During insert/built, the open hast table performed faster than both closed hash table. Both closed hash tables had very similar performance during insert.
