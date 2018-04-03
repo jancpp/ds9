@@ -12,35 +12,35 @@ Updated: 4/2/2018
 
 MinHeap::MinHeap() {
     m_size = 0;
-    for (size_t i=0; i<sizeof(m_array); i++) {
+    for (int i=0; i<10000000; i++) {
         m_array[i] = -1;
     }
 }
 
 void MinHeap::buildheap() {
-//    //         Read data from a file into array
-//    std::ifstream inputFile;
-//    int number = -1;
-//    m_size = 0;
-//    inputFile.open("data.txt");
-//    if (!inputFile) {
-//        inputFile.close();
-//        std::cout << "Error reading the input file.\n";
-//    } else {
-//        std::cout << "Data.txt elements:";
-//        while(inputFile >> number) {
-//            std::cout << " " << number;
-//            m_array[m_size] = number;
-//            m_size++;
-//        }
-//        inputFile.close();
-//        std::cout << "\n";
-//        for (int i=m_size-1; 0<=i; i--) {
-//            if (!isLeaf(i)) {
-//                heapify(i);
-//            }
-//        }
-//    }
+    //         Read data from a file into array
+    std::ifstream inputFile;
+    int number = -1;
+    m_size = 0;
+    inputFile.open("data.txt");
+    if (!inputFile) {
+        inputFile.close();
+        std::cout << "Error reading the input file.\n";
+    } else {
+        std::cout << "Data.txt elements:";
+        while(inputFile >> number) {
+            std::cout << " " << number;
+            m_array[m_size] = number;
+            m_size++;
+        }
+        inputFile.close();
+        std::cout << "\n";
+        for (int i=m_size-1; 0<=i; i--) {
+            if (!isLeaf(i)) {
+                heapify(i);
+            }
+        }
+    }
 }
 
 void MinHeap::heapify(int index) {

@@ -83,7 +83,7 @@ public:
     int parentOf(int index);
 
 private:
-    int m_array[500];
+    int m_array[10000000];
     int m_size;
     static const int M_K = 2; // for K-ary heap (5-heap)
 

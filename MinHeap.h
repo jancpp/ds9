@@ -12,7 +12,7 @@ Updated: 4/2/2018
 #include <queue>
 #include <math.h>
 
-class MinHeap{ // //}: public Heap {
+class MinHeap {
 
 public:
     MinHeap();
@@ -83,7 +83,7 @@ public:
     int parentOf(int index);
 
 private:
-    int m_array[500];
+    int m_array[10000000];
     int m_size;
     static const int M_K = 2; // for K-ary heap (5-heap)
 
