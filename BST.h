@@ -17,7 +17,6 @@ class BST {
 private:
 	Node *m_root;
     int m_size;
-
     
     // @pre:    BST
     // @post:   Root is set
@@ -68,6 +67,11 @@ public:
 	BST();
 	~BST();
 
+    // @pre:    BST
+    // @post:   None
+    // @return: Size of the bst
+    int getSize();
+    
 	// @pre:    Binary search tree
 	// @Post:   New node inserted into the tree:    as root if empty,
 	//                                              as left node if value is smaller then root value

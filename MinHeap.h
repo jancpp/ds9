@@ -17,6 +17,11 @@ class MinHeap {
 public:
     MinHeap();
 
+    // @pre:    Heap
+    // @post:   None
+    // @return: Size of heap.
+    int getSize();
+    
     // @pre:    File with numbers
     // @Post:   Min 5-heap
     // @Return: None

@@ -16,7 +16,12 @@ class MaxHeap {
     
 public:
     MaxHeap();
-
+    
+    // @pre:    Heap
+    // @post:   None
+    // @return: Size of heap.
+    int getSize();
+    
     // @pre:    File with numbers
     // @Post:   Max 5 - heap
     // @Return: None

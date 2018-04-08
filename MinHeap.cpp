@@ -17,6 +17,10 @@ MinHeap::MinHeap() {
     }
 }
 
+int MinHeap::getSize() {
+    return m_size;
+}
+
 void MinHeap::buildheap(int m, int size, int seed) {
     //         Read data from a file into array
 //    std::ifstream inputFile;
@@ -49,20 +53,21 @@ void MinHeap::buildheap(int m, int size, int seed) {
         m_array[m_size] = randomNumber;
         m_size++;
     }
-    std::cout << "\n";
     for (int i=m_size-1; 0<=i; i--) {
         if (!isLeaf(i)) {
             heapify(i);
         }
     }
-    levelorder();
+//    levelorder();
 }
 
 void MinHeap::heapify(int index) {
-    int min = minChild(index);
-    if ((m_array[index] != -1) && (m_array[index] > m_array[min])) {
-        swap(index, min);
-        heapify(min);
+    if (minChild(index) < 10000000) {
+        int min = minChild(index);
+        if ((m_array[index] != -1) && (m_array[index] > m_array[min])) {
+            swap(index, min);
+            heapify(min);
+        }
     }
 }
 

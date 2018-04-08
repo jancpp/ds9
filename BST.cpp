@@ -9,6 +9,10 @@
 BST::BST(): m_root(nullptr), m_size(0) {}
 BST::~BST() {}
 
+int BST::getSize() {
+    return m_size;
+}
+
 void BST::SetRoot(Node *root) {
     m_root = root;
 }

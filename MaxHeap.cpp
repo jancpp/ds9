@@ -18,6 +18,10 @@ MaxHeap::MaxHeap() {
     
 }
 
+int MaxHeap::getSize() {
+    return m_size;
+}
+
 void MaxHeap::buildheap(int m, int size, int seed) {
     
     // Read data from a file into array
@@ -44,20 +48,21 @@ void MaxHeap::buildheap(int m, int size, int seed) {
         m_array[m_size] = randomNumber;
         m_size++;
     }
-    std::cout << "\n";
     for (int i=m_size-1; 0<=i; i--) {
         if (!isLeaf(i)) {
             heapify(i);
         }
     }
-    levelorder();
+//    levelorder();
 }
 
 void MaxHeap::heapify(int index) {
-    int max = maxChild(index);
-    if ((m_array[index] != -1) && (m_array[index] < m_array[max])) {
-        swap(index, max);
-        heapify(max);
+    if (maxChild(index) < 10000000) {
+        int max = maxChild(index);
+        if ((m_array[index] != -1) && (m_array[index] < m_array[max])) {
+            swap(index, max);
+            heapify(max);
+        }
     }
 }
 
