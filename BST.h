@@ -16,7 +16,14 @@ class BST {
 
 private:
 	Node *m_root;
+    int m_size;
 
+    
+    // @pre:    BST
+    // @post:   Root is set
+    // @return: None
+    void SetRoot(Node *root);
+    
 	// @pre:    BST
 	// @post:   Inserting node in root
 	// @return: Node pointer of element to be inserted
@@ -46,11 +53,16 @@ private:
 	// @post:   Searching in root
 	// @return: Node pointer of element to be found
 	Node *FindMaxHelper(Node *root);
-
-	// @pre:    BST
-	// @post:   Deleted node from the tree
-	// @return: True if deleted, false otherwise
-	bool DeleteHelper(int value, Node *root);
+    
+    // @pre:    BST
+    // @post:   Min node deleted node from the tree
+    // @return: True if deleted, false otherwise
+    bool DeleteMinHelper(Node *root);
+    
+    // @pre:    BST
+    // @post:   Max node deleted node from the tree
+    // @return: True if deleted, false otherwise
+    bool DeleteMaxHelper(Node *root);
 
 public:
 	BST();

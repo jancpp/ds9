@@ -2,13 +2,16 @@
  Author: Jan Polzer
  File:   BST.cpp
  Date:   2/12/2018
- Updated: 4/2/2018
  */
 
 #include "BST.h"
 
-BST::BST(): m_root(nullptr) {}
+BST::BST(): m_root(nullptr), m_size(0) {}
 BST::~BST() {}
+
+void BST::SetRoot(Node *root) {
+    m_root = root;
+}
 
 bool BST::insert(int value) {
     bool inserted = false;
@@ -16,6 +19,7 @@ bool BST::insert(int value) {
     m_root = InsertHelper(m_root, newNode);
     if (m_root != nullptr) {
         inserted = true;
+        m_size++;
     }
     return inserted;
 }
@@ -36,101 +40,86 @@ Node *BST::InsertHelper(Node *root, Node *newNode) {
     return root;
 }
 
-bool BST::Delete(int value) {
-    bool deleted = false;
-    deleted = DeleteHelper(value, m_root);
-    return deleted;
-}
-
 bool BST::deletemin() {
     if (m_root == nullptr) {
         return false;
     } else {
-        int value = FindMin()->value();
-        return DeleteHelper(value, m_root);
+        return DeleteMinHelper(m_root);
     }
+}
+
+bool BST::DeleteMinHelper(Node *parent) {
+    bool deleted = false;
+    if (m_size == 1){
+        delete m_root;
+        m_root = nullptr;
+        deleted = true;
+        m_size--;
+    } else if ((parent->right() == nullptr) && (parent->left() != nullptr) && (parent->left()->left() == nullptr) && (parent->left()->right() == nullptr)) {
+        delete parent->left();
+        parent->setLeft(nullptr);
+        deleted = true;
+        m_size--;
+    } else if (parent->left() == nullptr) {
+        SetRoot(parent->right());
+        deleted = true;
+        m_size--;
+    }
+    else if ((parent->left()->left() == nullptr) && (parent->left()->right() != nullptr)) {
+        parent->setLeft(parent->left()->right());
+        deleted = true;
+        m_size--;
+    }
+    else if ((parent->left()->left() == nullptr) && (parent->left()->right() == nullptr)) {
+        delete parent->left();
+        parent->setLeft(nullptr);
+        deleted = true;
+        m_size--;
+    }else {
+        return DeleteMinHelper(parent->left());
+    }
+    return deleted;
+}
+
+bool BST::DeleteMaxHelper(Node *parent) {
+    bool deleted = false;
+    if (m_size == 1){
+        delete m_root;
+        m_root = nullptr;
+        deleted = true;
+        m_size--;
+    } else if ((parent->left() == nullptr) && (parent->right() != nullptr) && (parent->right()->right() == nullptr) && (parent->right()->left() == nullptr)) {
+        delete parent->right();
+        parent->setRight(nullptr);
+        deleted = true;
+        m_size--;
+    } else if (parent->right() == nullptr) {
+        SetRoot(parent->left());
+        deleted = true;
+        m_size--;
+    }
+    else if ((parent->right()->right() == nullptr) && (parent->right()->left() != nullptr)) {
+        parent->setRight(parent->right()->left());
+        deleted = true;
+        m_size--;
+    }
+    else if ((parent->right()->right() == nullptr) && (parent->right()->left() == nullptr)) {
+        delete parent->right();
+        parent->setRight(nullptr);
+        deleted = true;
+        m_size--;
+    }else {
+        return DeleteMaxHelper(parent->right());
+    }
+    return deleted;
 }
 
 bool BST::deletemax() {
     if (m_root == nullptr) {
         return false;
     } else {
-        int value = FindMax()->value();
-        return DeleteHelper(value, m_root);
+        return DeleteMaxHelper(m_root);
     }
-}
-// Delete(x) – Should delete x from the BST. For consistency when deleting
-// an element that has two children, use the smallest element from its right subtree
-// to replace x (using deleteMin). Should delete the first occurrence of x
-// if there are duplicated elements. Return error if x is not found or the BST is empty.
-bool BST::DeleteHelper(int value, Node *root) {
-    bool deleted = false;
-    Node *parent = nullptr; // parent of node to be deleted
-    if (root == nullptr) {
-        return false;
-    }
-    while ((root != nullptr) && (root->value() != value)) {
-        if (value < root->value()) { // search on left
-            //            if (root->left() != nullptr)
-            parent = root;
-            root = root->left();
-        } else if (value > root->value()) { // search on right
-            parent = root;
-            root = root->right();
-        } else {
-            // value == root->value()
-            return false;
-        }
-    }
-    if (root == nullptr) {
-        return false;
-    } else if ((m_root->value() == value) && (root->left() == nullptr) && (root->right() == nullptr)) { // one node in tree
-        delete m_root;
-        m_root = nullptr;
-        return true;
-    } else if ((root->left() == nullptr) && (root->right() == nullptr)) { // two nodes in tree
-        if (parent->left() == root) {
-            parent->setLeft(nullptr);
-        } else if (parent->right() == root) {
-            parent->setRight(nullptr);
-        }
-        delete root;
-        root = nullptr;
-        return true;
-    } else if((root->right() != nullptr) && (root->left() == nullptr)) {
-        if(parent->left() == root) {
-            parent->setLeft(root->right());
-        }
-        else if(parent->right() == root) {
-            parent->setRight(root->right());
-        }
-        delete root;
-        root = nullptr;
-        return true;
-    }
-    
-    if((root->right() == nullptr) && (root->left() != nullptr)) {
-        if(parent->left() == root) {
-            parent->setLeft(root->left());
-        }
-        else if(parent->right() == root) {
-            parent->setRight(root->left());
-        }
-        delete root;
-        root = nullptr;
-        return true;
-        
-        
-    }// when deleting an element that has two children,
-    // we delete using the smallest element from its right subtree
-    // to replace x (using deleteMin).
-    else if ((root->right() != nullptr) && (root->left() != nullptr)) {
-        int min = FindMinHelper(root->right())->value();
-        root->setValue(min);
-        DeleteHelper(min, root->right());
-        deleted = true;
-    }
-    return deleted;
 }
 
 Node *BST::FindMin() {
@@ -142,6 +131,9 @@ Node *BST::FindMin() {
 }
 
 Node *BST::FindMinHelper(Node *root) {
+    //    if (root == nullptr){
+    //        return nullptr;
+    //    } else
     if (root->left() == nullptr) {
         return root;
     } else {
@@ -176,8 +168,8 @@ void BST::Preorder() {
 void BST::PreorderHelper(Node *root) {
     if (root != nullptr) {
         std::cout << " " << root->value();
-        InorderHelper(root->left());
-        InorderHelper(root->right());
+        PreorderHelper(root->left());
+        PreorderHelper(root->right());
     }
 }
 

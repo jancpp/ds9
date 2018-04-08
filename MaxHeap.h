@@ -20,7 +20,7 @@ public:
     // @pre:    File with numbers
     // @Post:   Max 5 - heap
     // @Return: None
-    void buildheap();
+    void buildheap(int m, int size, int seed);
 
     // @pre:    5 - max heap
     // @Post:   Inserted a new element

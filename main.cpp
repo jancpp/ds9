@@ -12,9 +12,21 @@ Date:   4/4/2018
 #include <ctime>
 #include <iomanip>
 
-// Measure time that take to insert @size random numbers into a data structure
+// Measure time that take to build @size random numbers into a data structure
 template <class T>
-void insertTime (int m, int size, int seed, T *ds, double &time) {
+void buildTimeHeaps (int m, int size, int seed, T *ds, double &time) {
+    clock_t start = 0;
+    int randomNumber = 0;
+    srand(seed);
+    start = clock();
+    for (int i=0; i<size; i++) {
+        randomNumber = rand()%(5*m) + 1;
+        ds->buildheap(m, size, seed);
+    }
+    time = (clock()-start)/(double)(CLOCKS_PER_SEC/1000);
+}
+template <class T>
+void buildTimeBST (int m, int size, int seed, T *ds, double &time) {
     clock_t start = 0;
     int randomNumber = 0;
     srand(seed);
@@ -25,16 +37,15 @@ void insertTime (int m, int size, int seed, T *ds, double &time) {
     }
     time = (clock()-start)/(double)(CLOCKS_PER_SEC/1000);
 }
-
 // Measure time that takes to perform delete min in a date structure
 template <class T>
 void timeDeleteMin (int m, int size, int seed, T *ds, double &timeDeleteMin) {
     clock_t start = 0;
-    int randomNumber = 0;
+//    int randomNumber = 0;
     srand(seed);
     start = clock();
     for (int i=0; i<size; i++) {
-        randomNumber = rand()%(5*m) + 1;
+//        randomNumber = rand()%(5*m) + 1;
         ds->deletemin();
     }
     timeDeleteMin = (clock()-start)/(double)(CLOCKS_PER_SEC/1000);
@@ -44,11 +55,11 @@ void timeDeleteMin (int m, int size, int seed, T *ds, double &timeDeleteMin) {
 template <class T>
 void timeDeleteMax (int m, int size, int seed, T *ds, double &timeDeleteMax) {
     clock_t start = 0;
-    int randomNumber = 0;
+//    int randomNumber = 0;
     srand(seed);
     start = clock();
     for (int i=0; i<size; i++) {
-        randomNumber = rand()%(5*m) + 1;
+//        randomNumber = rand()%(5*m) + 1;
         ds->deletemin();
     }
     timeDeleteMax = (clock()-start)/(double)(CLOCKS_PER_SEC/1000);
@@ -60,8 +71,8 @@ int main(int argc, char **argv) {
     MinHeap *dsMinHeap = nullptr;
     MaxHeap *dsMaxHeap = nullptr;
 
-    int m = 1000;  // 10mil
-    int array_size = 100; // 1mil
+    int m = 10;  // 1mil
+    int array_size = 100; // 10mil
 
     int size = 0;
     int seed = 0;
@@ -108,14 +119,14 @@ int main(int argc, char **argv) {
 
                 size = (int)(m * m_mult[mult]);
 
-                // Measure insert time
+                // Measure build time
                 size = m_mult[mult] * m;
                 // BST
-                insertTime(m, size, seed, dsBST, timesBST[seed][0][mult][times]);
+                buildTimeBST(m, size, seed, dsBST, timesBST[seed][0][mult][times]);
                 // Min Heap
-                insertTime(m, size, seed, dsMinHeap, timesMin[seed][0][mult][times]);
+                buildTimeHeaps(m, size, seed, dsMinHeap, timesMin[seed][0][mult][times]);
                 // Max Heap
-                insertTime(m, size, seed, dsMaxHeap, timesMax[seed][0][mult][times]);
+                buildTimeHeaps(m, size, seed, dsMaxHeap, timesMax[seed][0][mult][times]);
 //
 //                // Accumulate times for diffrent seeds
 //                accSeedsBST[0][mult][times] += timesBST[seed][0][mult][times];
