@@ -17,4 +17,4 @@ Node.o: Node.cpp Node.h
 	g++ -g -std=c++11 -Wall -c Node.cpp
 
 clean:
-	rm *.o
+	rm *.o Lab09

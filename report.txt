@@ -1,0 +1,36 @@
+Jan Polzer
+Lab10 – Report
+
+1-	Organization of experimental profiling.
+2-	Input data generating using random number generator.
+3-	CPU time recording in C++.
+4-	Data recording and analysis.
+5-	Performance comparison, observations and summary.
+6-	Conclusion.
+
+1-
+For the experimental profiling of binary search tree, min heap and max heap,
+I recorded times to fill structures with data, delete min and delete max elements.
+In all data structures I used the same data while recording times. I ran all
+program 5 times with different data, and then 5 times using different data sizes
+(1000000 - 5000000) and taking averages.
+2-
+I generated all data using random number generator (srand() function) inside
+buildHeaps and buildtBST functions. In the data structures, for bst I used insert
+into empty tree method. For both heaps I build heaps using the bottom up approach.
+3-
+I recorded times while starting a clock, calling build heap/insert functions and
+converting time to seconds.
+4-
+I averaged the data for different seeds and placed them into tables for each data
+structure. With large amounts of data, the program ran over 1 hour,
+depending on computer I used.
+5-
+The binary search tree performed very slow while building, but outperformed both
+heaps in delete operations. The heaps build time was very fast in compete to bst.
+The min heap was deleting much faster the min the max numbers, the max heap was
+exact opposite.
+6-
+In conclusion, it was a great exercise that made me realize how significant
+difference it is in using array implementation vs. , and how bst can outperform
+heaps in delete operations.

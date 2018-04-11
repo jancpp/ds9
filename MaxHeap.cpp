@@ -15,7 +15,6 @@ MaxHeap::MaxHeap() {
     for (int i=0; i<10000000; i++) {
         m_array[i] = -1;
     }
-    
 }
 
 int MaxHeap::getSize() {
@@ -23,23 +22,6 @@ int MaxHeap::getSize() {
 }
 
 void MaxHeap::buildheap(int m, int size, int seed) {
-    
-    // Read data from a file into array
-//    std::ifstream inputFile;
-//    int number = -1;
-//    m_size = 0;
-//    inputFile.open("data.txt");
-//    if (!inputFile) {
-//        inputFile.close();
-//        std::cout << "Error reading the input file.\n";
-//    } else {
-//        std::cout << "Data.txt elements:";
-//        while(inputFile >> number) {
-//            std::cout << " " << number;
-//            m_array[m_size] = number;
-//            m_size++;
-//        }
-//        inputFile.close();
     int randomNumber = 0;
     srand(seed);
 //    start = clock();
@@ -53,7 +35,6 @@ void MaxHeap::buildheap(int m, int size, int seed) {
             heapify(i);
         }
     }
-//    levelorder();
 }
 
 void MaxHeap::heapify(int index) {
